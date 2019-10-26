@@ -22,7 +22,9 @@ def index_view(request):
     Main home page view
     '''
     current_user = request.user
-    current_user_neighborhood = request.user.profile.neighborhood 
+    current_user_neighborhood = request.user.profile.neighborhood
+    if current_user_neighborhood == None:
+        messages.info(request,"Please join a neibourhood to engage by updating your profile") 
     title = "home"
     neighborhood_stories = Neighborhood_stories.objects.filter(neighborhood=current_user_neighborhood)
     neighborhood_contacts = Neighborhood_contact_info.objects.filter(neighborhood=current_user_neighborhood)
