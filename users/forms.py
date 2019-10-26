@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
+from main.models import Neighborhood
 
 class UserRegisterForm(UserCreationForm):
     '''
@@ -26,7 +27,8 @@ class ProfileUpdateForm(forms.ModelForm):
     '''
     Form to update user profile picture
     '''
+    neighbourhood = forms.ModelChoiceField(queryset=Neighborhood.objects.all())
     class Meta:
         model = Profile
-        fields = ['bio','profile_picture']
+        fields = ['bio','neighbourhood','profile_picture']
 
