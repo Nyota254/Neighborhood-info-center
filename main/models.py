@@ -71,4 +71,16 @@ class Neighborhood_contact_info(models.Model):
 
     def __str__(self):
         return f'{self.department} department contact from {self.Neighborhood.name} neighborhood'
+
+class Neighborhood_announcement(models.Model):
+    '''
+    Announcements model
+    '''
+    title = models.CharField(max_length=30)
+    announcement = models.TextField()
+    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.title} Announcement for {self.neighborhood.name} Neighborhood' 
+    
     
