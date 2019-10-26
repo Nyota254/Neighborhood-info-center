@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import (
     Neighborhood,
     Neighborhood_buisnesses,
@@ -7,6 +8,13 @@ from .models import (
     Neighborhood_stories,
     Neighborhood_announcement,
 ) 
+from .forms import (
+    NeighborhoodStoryForm,
+    NeighborhoodCreationForm,
+    NeighborhoodContactForm,
+    NeighborhoodBuisnessesForm,
+    NeighborhoodAnnouncementForm,
+)
 
 @login_required
 def index_view(request):
@@ -30,3 +38,27 @@ def index_view(request):
     }
 
     return render(request,"main/index.html",context)
+
+@login_required
+def create_story(request):
+    '''
+    will handle the creation of neihbourhood storys
+    '''
+    current_user = request.user
+    current_user_neighborhood = request.user.profile.neighborhood
+    title = "Post a story"
+    if current_user_neighborhood:
+        if request.method == "POST":
+            form = NeighborhoodStoryForm(request.POST)
+            if form.is_valid():
+                story = form.save(commit=False)
+                story.user = current_user
+                story.neighborhood = current_user_neighborhood
+                story.save()
+                return redirect(index_view)
+        else:
+            form = NeighborhoodStoryForm()
+            return render(request,"main/post_story.html",{"form":form})
+    else:
+        messages.warning(request,"Please Join a neighbourhood to post a story")
+        return redirect(index_view)

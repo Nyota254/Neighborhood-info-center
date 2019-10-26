@@ -36,7 +36,7 @@ class NeighborhoodContactForm(forms.ModelForm):
     Form for adding contacts to the neighbourhood
     '''
     class Meta:
-        models = Neighborhood_contact_info
+        model = Neighborhood_contact_info
         fields = ["department","contact_number","contact_email"]
 
 class NeighborhoodStoryForm(forms.ModelForm):
@@ -44,7 +44,7 @@ class NeighborhoodStoryForm(forms.ModelForm):
     Form for creating stories about the neighbourhood
     '''
     class Meta:
-        models = Neighborhood_stories
-        fields = ["title","headline","story"]
+        model = Neighborhood_stories
+        fields = ["title","headline","Story"]
 
     
