@@ -64,3 +64,20 @@ def create_story(request):
     else:
         messages.warning(request,"Please Join a neighbourhood to post a story")
         return redirect(index_view)
+
+@login_required
+def add_buisness(request):
+    '''
+    This view will handle user adding buisness to neighbourehood 
+    '''
+    current_user_neighborhood = request.user.profile.neighborhood
+    if request.method == "POST":
+        form = NeighborhoodBuisnessesForm(request.POST)
+        if form.is_valid():
+            buisness = form.save(commit=False)
+            buisness.user = request.user
+            buisness.neighborhood = current_user_neighborhood
+            buisness.save()
+    else:
+        form = NeighborhoodBuisnessesForm()
+        return render(request,"main/buisness_form.html",{"form":form})
