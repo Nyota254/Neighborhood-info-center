@@ -2,6 +2,49 @@
 
 {% block content %} 
 
-    <p class="text-center"><button class="btn btn-outline-primary">Good morning</button></p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                {% if neighborhood_stories %}
+                    {% for story in neighborhood_stories %}
+                        <!-- <div class="panel panel-default">
+                            <div class="panel-heading">{{ story.title }} by <img src="{{ story.user.profile.profile_picture.url }}" alt=""> {{ story.user.username }}</div>
+                            <div class="panel-body">{{ story.Story }}</div>
+                        </div> -->
+                        <div class="card">
+                            <div class="card-header">Writer: <img src="{{ story.user.profile.profile_picture.url }}" alt="" class="rounded-circle custom-display border border-danger"> {{ story.user.username }}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ story.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">panel </h6>
+                                <p class="card-text">{{ story.Story }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Note!!</div>
+                            <div class="card-text">Are you registerd at a neighborhood? if you are then there are no stories for this hood yet</div>
+                        <div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <p><strong>Contacts</strong></p>
+                {% for contact in neighborhood_contacts %}
+                    <h1>{{ contact.department }}</h1>
+                    <p>{{ contact.contact_number }}</p>
+                    <p>{{ contact.contact_email }}</p>
+                {% endfor %}
+                <p><strong>Buisnesses</strong></p>
+                {% for buisness in neighborhood_buisnesses %}
+                    <h1>{{ buisness.buisness_name }}</h1>
+                    <p>{{ buisness.user.username }}</p>
+                    <p>{{ buisness.buisness_email }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     
 {% endblock %}
