@@ -7,7 +7,7 @@ class Neighborhood(models.Model):
     '''
     name = models.CharField(max_length=40)
     location = models.CharField(max_length=250)
-    occupants_count = models.IntegerField()
+    # occupants_count = models.IntegerField()
     admin = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def create_neighborhood(self):
