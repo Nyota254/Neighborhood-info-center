@@ -6,7 +6,7 @@ class Profile(models.Model):
     class for user profiles
     '''
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    id_number = models.IntegerField()
+    id_number = models.IntegerField(blank=True,null=True)
     profile_picture = models.ImageField(default="default.jpg",upload_to='profile_pics')
     bio = models.TextField()
     ############
