@@ -15,6 +15,7 @@ from .forms import (
     NeighborhoodBuisnessesForm,
     NeighborhoodAnnouncementForm,
 )
+from users.models import Profile
 
 @login_required
 def index_view(request):
@@ -101,32 +102,47 @@ def add_neighborhood(request):
         return render(request,"main/add_neighborhood.html",{"form":form})
 
 @login_required
-def add_contactinfo(request):
+def neighborhood_admin(request):
     '''
     function view for adding contact info
     '''
+    current_user_neighborhood = request.user.profile.neighborhood
+    neighborhood_count = Profile.objects.filter(neighborhood=current_user_neighborhood)
     if request.method == "POST":
-        contact_form = NeighborhoodContactForm(request.POST)
-        if contact_form.is_valid():
-            new_contact = contact_form.save(commit=False)
-            new_contact.neighborhood = request.user.profile.neighborhood
-            new_contact.save()
+        if 'c_form' in request.POST:
+            contact_form = NeighborhoodContactForm(request.POST,prefix="c_form")
+            if contact_form.is_valid():
+                new_contact = contact_form.save(commit=False)
+                new_contact.neighborhood = request.user.profile.neighborhood
+                new_contact.save()
+                return redirect(neighborhood_admin)
+            announcement_form = NeighborhoodAnnouncementForm(prefix="a_form")
+        elif 'a_form' in request.POST:
+            announcement_form = NeighborhoodAnnouncementForm(request.POST)
+            if announcement_form.is_valid():
+                announcement = announcement_form.save(commit=False)
+                announcement.neighborhood = request.user.profile.neighborhood
+                announcement.save()
+                return redirect(neighborhood_admin)
+            contact_form = NeighborhoodContactForm(prefix="c_form")
     else:
-        contact_form = NeighborhoodContactForm()
+        announcement_form = NeighborhoodAnnouncementForm(prefix="a_form")
+        contact_form = NeighborhoodContactForm(prefix="c_form")
 
-    if request.method == "POST":
-        announcement_form = NeighborhoodAnnouncementForm(request.POST)
-        if announcement_form.is_valid():
-            announcement = announcement_form.save(commit=False)
-            announcement.neighborhood = request.user.profile.neighborhood
-            announcement.save()
-    else:
-        announcement_form = NeighborhoodAnnouncementForm()
+    # if request.method == "POST":
+    #     announcement_form = NeighborhoodAnnouncementForm(request.POST)
+    #     if announcement_form.is_valid():
+    #         announcement = announcement_form.save(commit=False)
+    #         announcement.neighborhood = request.user.profile.neighborhood
+    #         announcement.save()
+    # else:
+    #     announcement_form = NeighborhoodAnnouncementForm()
 
     context = {
         "c_form":contact_form,
         "a_form":announcement_form,
-        "title":"Admin dashboard"
+        "title":"Admin dashboard",
+        "n_count":neighborhood_count
     }
 
     return render(request,"main/neighborhood_admin.html",context)
