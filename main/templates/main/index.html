@@ -5,6 +5,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7">
+                {% if admin %}
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-primary">Manage Neighborhood</a>
+                {% endif %}
                 {% if neighborhood_stories %}
                     {% for story in neighborhood_stories %}
                         <!-- <div class="panel panel-default">

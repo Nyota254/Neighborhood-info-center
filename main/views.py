@@ -27,6 +27,7 @@ def index_view(request):
     if current_user_neighborhood == None:
         messages.info(request,"Please join a neibourhood to engage by updating your profile") 
     title = "home"
+    user_status = Neighborhood.objects.filter(admin=current_user)
     neighborhood_stories = Neighborhood_stories.objects.filter(neighborhood=current_user_neighborhood)
     neighborhood_contacts = Neighborhood_contact_info.objects.filter(neighborhood=current_user_neighborhood)
     neighborhood_buisnesses = Neighborhood_buisnesses.objects.filter(neighborhood=current_user_neighborhood)
@@ -37,7 +38,8 @@ def index_view(request):
         "neighborhood_stories":neighborhood_stories,
         "neighborhood_contacts":neighborhood_contacts,
         "neighborhood_buisnesses":neighborhood_buisnesses,
-        "neighborhood_announcements":neighborhood_announcements
+        "neighborhood_announcements":neighborhood_announcements,
+        "admin":user_status
     }
 
     return render(request,"main/index.html",context)
@@ -106,6 +108,8 @@ def neighborhood_admin(request):
     '''
     function view for adding contact info
     '''
+    current_user=request.user
+    user_status = Neighborhood.objects.filter(admin=current_user)
     current_user_neighborhood = request.user.profile.neighborhood
     neighborhood_count = Profile.objects.filter(neighborhood=current_user_neighborhood)
     if request.method == "POST":
@@ -144,5 +148,8 @@ def neighborhood_admin(request):
         "title":"Admin dashboard",
         "n_count":neighborhood_count
     }
-
-    return render(request,"main/neighborhood_admin.html",context)
+    if user_status:
+        return render(request,"main/neighborhood_admin.html",context)
+    else:
+        messages.warning(request,f"You do not have permissons to access that page please contact {current_user_neighborhood.admin.username}")
+        return redirect(index_view)

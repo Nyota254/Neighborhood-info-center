@@ -4,6 +4,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-8">
+            <h1>Neighbourhood Residents</h1>
             {% for person in n_count %}
                 <p>{{ person.user.username }}</p>
             {% endfor %}
