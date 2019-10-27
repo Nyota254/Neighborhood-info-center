@@ -29,7 +29,7 @@ class NeighborhoodBuisnessesForm(forms.ModelForm):
     '''
     class Meta:
         model = Neighborhood_buisnesses
-        fields = ["buisness_name","buisness_email"]
+        fields = ["buisness_name","buisness_email","buisness_number"]
 
 class NeighborhoodContactForm(forms.ModelForm):
     '''
