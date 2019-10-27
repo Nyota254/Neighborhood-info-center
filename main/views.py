@@ -78,6 +78,7 @@ def add_buisness(request):
             buisness.user = request.user
             buisness.neighborhood = current_user_neighborhood
             buisness.save()
+            return redirect(index_view)
     else:
         form = NeighborhoodBuisnessesForm()
         return render(request,"main/buisness_form.html",{"form":form})
@@ -98,3 +99,34 @@ def add_neighborhood(request):
     else:
         form = NeighborhoodCreationForm()
         return render(request,"main/add_neighborhood.html",{"form":form})
+
+@login_required
+def add_contactinfo(request):
+    '''
+    function view for adding contact info
+    '''
+    if request.method == "POST":
+        contact_form = NeighborhoodContactForm(request.POST)
+        if contact_form.is_valid():
+            new_contact = contact_form.save(commit=False)
+            new_contact.neighborhood = request.user.profile.neighborhood
+            new_contact.save()
+    else:
+        contact_form = NeighborhoodContactForm()
+
+    if request.method == "POST":
+        announcement_form = NeighborhoodAnnouncementForm(request.POST)
+        if announcement_form.is_valid():
+            announcement = announcement_form.save(commit=False)
+            announcement.neighborhood = request.user.profile.neighborhood
+            announcement.save()
+    else:
+        announcement_form = NeighborhoodAnnouncementForm()
+
+    context = {
+        "c_form":contact_form,
+        "a_form":announcement_form,
+        "title":"Admin dashboard"
+    }
+
+    return render(request,"main/neighborhood_admin.html",context)
