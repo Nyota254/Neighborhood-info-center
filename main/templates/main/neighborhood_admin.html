@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            {% for person in n_count %}
+                <p>{{ person.user.username }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+    <div class="content-section">
+        <form  method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add announcements</legend>
+                {{ a_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit" name="a_form">Submit</button>
+            </div>
+        </form>
+
+        <form  method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add neighbourhood contact</legend>
+                    {{ c_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit" name="c_form">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
