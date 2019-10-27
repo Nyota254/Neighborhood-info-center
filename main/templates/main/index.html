@@ -39,9 +39,9 @@
                 {% endfor %}
                 <p><strong>Buisnesses</strong></p>
                 {% for buisness in neighborhood_buisnesses %}
-                    <h1>{{ buisness.buisness_name }}</h1>
-                    <p>{{ buisness.user.username }}</p>
-                    <p>{{ buisness.buisness_email }}</p>
+                    <p><strong>Buisness: {{ buisness.buisness_name }}</strong></p>
+                    <p>Owner: {{ buisness.user.username }}</p>
+                    <p>Email: {{ buisness.buisness_email }} :Number : {{buisness.buisness_number}} </p>
                 {% endfor %}
             </div>
         </div>
