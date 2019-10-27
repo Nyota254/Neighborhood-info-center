@@ -81,3 +81,20 @@ def add_buisness(request):
     else:
         form = NeighborhoodBuisnessesForm()
         return render(request,"main/buisness_form.html",{"form":form})
+
+@login_required
+def add_neighborhood(request):
+    '''
+    function view for adding neighborhood
+    '''
+    
+    if request.method == "POST":
+        form = NeighborhoodCreationForm(request.POST)
+        if form.is_valid():
+            neighborhood = form.save(commit=False)
+            neighborhood.admin = request.user
+            neighborhood.save()
+            return redirect(index_view)
+    else:
+        form = NeighborhoodCreationForm()
+        return render(request,"main/add_neighborhood.html",{"form":form})
