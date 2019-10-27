@@ -39,6 +39,7 @@ class Neighborhood_buisnesses(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
     buisness_email = models.EmailField()
+    buisness_number = models.IntegerField(blank=True,null=True)
 
     @classmethod
     def buisness_search(cls,pk):
