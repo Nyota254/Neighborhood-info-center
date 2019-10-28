@@ -3,3 +3,31 @@
     width: 50px;
     padding: 3px;
 }
+
+/*** Start of login page styles *****/
+
+#bg-login,#bg-register {
+    background-image: url(../assets/bg_login.jpg);
+    background-size: cover;
+    height: 106vh;
+    color:white;
+    background-attachment: fixed;
+}
+
+/****** end of login and reg page style *******/
+
+
+/***** start of index page styling ******/
+
+#bg-index {
+    background-image: url(../assets/bg_login.jpg);
+    background-size: cover;
+    height: 106vh;
+    background-attachment: fixed;
+}
+
+/* #sticky {
+    position: sticky;
+} */
+
+/****** end of index page styling ******/

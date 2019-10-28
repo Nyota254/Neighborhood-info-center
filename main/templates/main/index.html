@@ -2,11 +2,11 @@
 
 {% block content %} 
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="bg-index">
         <div class="row">
             <div class="col-md-7">
                 {% if admin %}
-                    <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-primary">Manage Neighborhood</a>
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">Manage Neighborhood</a>
                 {% endif %}
                 {% if neighborhood_stories %}
                     {% for story in neighborhood_stories %}
@@ -21,7 +21,7 @@
                                 <h6 class="card-subtitle mb-2 text-muted"></h6>
                                 <p class="card-text">{{ story.Story }}</p>
                             </div>
-                        </div>
+                        </div><hr>
                     {% endfor %}
                 {% else %}
                     <div class="card">
@@ -33,18 +33,44 @@
                 {% endif %}
             </div>
             <div class="col-md-1"></div>
-            <div class="col-md-4">
-                <p><strong>Contacts</strong></p>
-                {% for contact in neighborhood_contacts %}
-                    <h1>{{ contact.department }}</h1>
-                    <p>{{ contact.contact_number }}</p>
-                    <p>{{ contact.contact_email }}</p>
+            <div class="col-md-4" id="sticky">
+                <h5>Announcements</h5>
+                {% for announcement in neighborhood_announcements %}
+                <div class="card">
+                        <div class="card-header">{{ announcement.title }}</div>
+                        <div class="card-body">
+                            <p class="card-text"> {{ announcement.announcement }}</p>
+                        </div>
+                    </div>
+
                 {% endfor %}
-                <p><strong>Buisnesses</strong></p>
+                <h5>Contacts</h5>
+                {% for contact in neighborhood_contacts %}
+                    <!-- <h1>{{ contact.department }}</h1>
+                    <p>{{ contact.contact_number }}</p>
+                    <p>{{ contact.contact_email }}</p> -->
+                    <div class="card">
+                        <div class="card-header">{{ contact.department }}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Number: {{ contact.contact_number }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                            <p class="card-text">Email: {{ contact.contact_email }}</p>
+                        </div>
+                    </div><br>
+                {% endfor %}
+                <h5>Buisnesses</h5>
                 {% for buisness in neighborhood_buisnesses %}
-                    <p><strong>Buisness: {{ buisness.buisness_name }}</strong></p>
+                    <!-- <p><strong>Buisness: {{ buisness.buisness_name }}</strong></p>
                     <p>Owner: {{ buisness.user.username }}</p>
-                    <p>Email: {{ buisness.buisness_email }} :Number : {{buisness.buisness_number}} </p>
+                    <p>Email: {{ buisness.buisness_email }} :Number : {{buisness.buisness_number}} </p> -->
+                    <div class="card">
+                        <div class="card-header">{{ buisness.buisness_name }}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Owner: {{ buisness.user.username }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                            <p class="card-text">Email: {{ buisness.buisness_email }} :Number : {{buisness.buisness_number}}</p>
+                        </div>
+                    </div><br>
                 {% endfor %}
             </div>
         </div>
