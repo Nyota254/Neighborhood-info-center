@@ -6,11 +6,26 @@
 
 /*** Start of login page styles *****/
 
-#bg-login,#bg-register {
+/* #bg-login,#bg-register {
     background-image: url(../assets/bg_login.jpg);
     background-size: cover;
     height: 106vh;
     color:white;
+    background-attachment: fixed;
+} */
+
+#bg-login,#bg-register,.profile-data,.admin-data {
+    color:white;
+}
+
+.bg-people {
+    background-color:rgba(0, 0, 0, 0.8);
+}
+
+body {
+    background-image: url(../assets/bg_login.jpg);
+    background-size: cover;
+    height: 106vh;
     background-attachment: fixed;
 }
 
@@ -19,17 +34,27 @@
 
 /***** start of index page styling ******/
 
-#bg-index {
+/* #bg-index {
     background-image: url(../assets/bg_login.jpg);
     background-size: cover;
     height: 106vh;
     background-attachment: fixed;
-}
+} */
 
-.index-sideview {
+.index-sideview,.my_profile-sideview {
     height: 200px;
     width: auto;
     background-color: #eee;
+    overflow: auto;
+}
+
+.profile-data {
+    background-color:rgba(0, 0, 0, 0.8);
+}
+
+#neighbourhood-residents {
+    height: 500px;
+    width: 200px;
     overflow: auto;
 }
 

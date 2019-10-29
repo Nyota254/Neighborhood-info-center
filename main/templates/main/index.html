@@ -1,83 +1,89 @@
 {% extends 'main/base.html' %}
 
-{% block content %} 
+{% block content %}
 
-    <div class="container-fluid" id="bg-index">
-        <div class="row">
-            <div class="col-md-7">
-                {% if admin %}
-                    <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">Manage Neighborhood</a>
-                {% endif %}
-                {% if neighborhood_stories %}
-                    {% for story in neighborhood_stories %}
-                        <!-- <div class="panel panel-default">
+<div class="container-fluid" id="bg-index">
+    <div class="row">
+        <div class="col-md-7">
+            {% if admin %}
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">Manage Neighborhood</a>
+            {% endif %}
+            {% if neighborhood_stories %}
+            {% for story in neighborhood_stories %}
+            <!-- <div class="panel panel-default">
                             <div class="panel-heading">{{ story.title }} by <img src="{{ story.user.profile.profile_picture.url }}" alt=""> {{ story.user.username }}</div>
                             <div class="panel-body">{{ story.Story }}</div>
                         </div> -->
-                        <div class="card">
-                            <div class="card-header">Writer: <img src="{{ story.user.profile.profile_picture.url }}" alt="" class="rounded-circle custom-display border border-danger" style="height: 50px; width: 50px; padding: 3px;"> {{ story.user.username }}</div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ story.title }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"></h6>
-                                <p class="card-text">{{ story.Story }}</p>
-                            </div>
-                        </div><hr>
-                    {% endfor %}
-                {% else %}
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Note!!</div>
-                            <div class="card-text">Are you registerd at a neighborhood? if you are then there are no stories for this hood yet</div>
-                        <div>
-                    </div>
-                {% endif %}
+            <div class="card">
+                <div class="card-header">Writer: <img src="{{ story.user.profile.profile_picture.url }}" alt=""
+                        class="rounded-circle custom-display border border-danger"
+                        style="height: 50px; width: 50px; padding: 3px;"> {{ story.user.username }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ story.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"></h6>
+                    <p class="card-text">{{ story.Story }}</p>
+                </div>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-4" id="sticky">
-                <h5>Announcements</h5>
-                {% for announcement in neighborhood_announcements %}
-                <div class="card">
-                        <div class="card-header">{{ announcement.title }}</div>
-                        <div class="card-body">
-                            <p class="card-text"> {{ announcement.announcement }}</p>
-                        </div>
-                    </div>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Note!!</div>
+                    <div class="card-text">Are you registerd at a neighborhood? if you are then there are no stories for
+                        this hood yet</div>
+                    <div>
+                    </div></div>
+                </div>
+                    {% endif %}
+                
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4" id="sticky">
+            <h5>Announcements</h5>
+            {% for announcement in neighborhood_announcements %}
+            <div class="card">
+                <div class="card-header">{{ announcement.title }}</div>
+                <div class="card-body">
+                    <p class="card-text"> {{ announcement.announcement }}</p>
+                </div>
+            </div>
 
-                {% endfor %}
-                <h5>Contacts</h5>
-                <div class="index-sideview">
+            {% endfor %}
+            <h5>Contacts</h5>
+            <div class="index-sideview">
                 {% for contact in neighborhood_contacts %}
-                    <!-- <h1>{{ contact.department }}</h1>
+                <!-- <h1>{{ contact.department }}</h1>
                     <p>{{ contact.contact_number }}</p>
                     <p>{{ contact.contact_email }}</p> -->
-                    <div class="card">
-                        <div class="card-header">{{ contact.department }}</div>
-                        <div class="card-body">
-                            <h5 class="card-title">Number: {{ contact.contact_number }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted"></h6>
-                            <p class="card-text">Email: {{ contact.contact_email }}</p>
-                        </div>
-                    </div><br>
+                <div class="card">
+                    <div class="card-header">{{ contact.department }}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Number: {{ contact.contact_number }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <p class="card-text">Email: {{ contact.contact_email }}</p>
+                    </div>
+                </div><br>
                 {% endfor %}
             </div>
-                <h5>Buisnesses</h5>
-                <div class="index-sideview">
+            <h5>Buisnesses</h5>
+            <div class="index-sideview">
                 {% for buisness in neighborhood_buisnesses %}
-                    <!-- <p><strong>Buisness: {{ buisness.buisness_name }}</strong></p>
+                <!-- <p><strong>Buisness: {{ buisness.buisness_name }}</strong></p>
                     <p>Owner: {{ buisness.user.username }}</p>
                     <p>Email: {{ buisness.buisness_email }} :Number : {{buisness.buisness_number}} </p> -->
-                    <div class="card">
-                        <div class="card-header">{{ buisness.buisness_name }}</div>
-                        <div class="card-body">
-                            <h5 class="card-title">Owner: {{ buisness.user.username }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted"></h6>
-                            <p class="card-text">Email: {{ buisness.buisness_email }} :Number : {{buisness.buisness_number}}</p>
-                        </div>
-                    </div><br>
+                <div class="card">
+                    <div class="card-header">{{ buisness.buisness_name }}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Owner: {{ buisness.user.username }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <p class="card-text">Email: {{ buisness.buisness_email }} :Number :
+                            {{buisness.buisness_number}}</p>
+                    </div>
+                </div><br>
                 {% endfor %}
-            </div>
             </div>
         </div>
     </div>
-    
+</div>
 {% endblock %}
