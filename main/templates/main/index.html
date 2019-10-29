@@ -45,6 +45,7 @@
 
                 {% endfor %}
                 <h5>Contacts</h5>
+                <div class="index-sideview">
                 {% for contact in neighborhood_contacts %}
                     <!-- <h1>{{ contact.department }}</h1>
                     <p>{{ contact.contact_number }}</p>
@@ -58,7 +59,9 @@
                         </div>
                     </div><br>
                 {% endfor %}
+            </div>
                 <h5>Buisnesses</h5>
+                <div class="index-sideview">
                 {% for buisness in neighborhood_buisnesses %}
                     <!-- <p><strong>Buisness: {{ buisness.buisness_name }}</strong></p>
                     <p>Owner: {{ buisness.user.username }}</p>
@@ -72,6 +75,7 @@
                         </div>
                     </div><br>
                 {% endfor %}
+            </div>
             </div>
         </div>
     </div>

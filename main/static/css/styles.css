@@ -26,6 +26,17 @@
     background-attachment: fixed;
 }
 
+.index-sideview {
+    height: 200px;
+    width: auto;
+    background-color: #eee;
+    overflow: auto;
+}
+
+body {
+    padding-top: 56px;
+}
+
 /* #sticky {
     position: sticky;
 } */
