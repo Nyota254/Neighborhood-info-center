@@ -153,3 +153,20 @@ def neighborhood_admin(request):
     else:
         messages.warning(request,f"You do not have permissons to access that page please contact {current_user_neighborhood.admin.username}")
         return redirect(index_view)
+
+@login_required
+def person_info(request):
+    '''
+    will show users profile and their neighbours
+    '''
+    current_user = request.user
+    profile = request.user.profile
+    current_user_neighborhood = request.user.profile.neighborhood
+    neighbours = Profile.objects.filter(neighborhood=current_user_neighborhood)
+    context = {
+        "neighbours":neighbours.exclude(user=current_user),
+        "profile":profile,
+        "current_user":current_user
+    }
+
+    return render(request,"main/my_profile.html",context)

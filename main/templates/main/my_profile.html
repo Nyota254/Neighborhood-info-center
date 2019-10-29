@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="container profile-data">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ current_user.profile.profile_picture.url }}" alt="profile image" class="rounded-circle profile-img">
+            </div>
+            <div class="col-md-4">
+                <h2>Username :{{ current_user.username }}</h2>
+                <p>{{ current_user.profile.bio }}</p>
+            </div>
+            <div>
+                <a href="{% url 'profile' %}" class="btn btn-outline-danger">Edit</a>
+            </div>
+        </div><hr style="background-color: white;">
+        <div class="row">
+            <div class="col-md-4" class="my_profile-sideview">
+                <br><br><h2>My Neighbours</h2>
+            {% for neighbour in neighbours %}
+                <p><img src="{{ neighbour.user.profile.profile_picture.url }}" alt=""
+                    class="rounded-circle custom-display border border-danger"
+                    style="height: 50px; width: 50px; padding: 3px;">{{ neighbour.user.username }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+           
+        </div>
+        <div class="col-md-4"></div>
+        </div>
+    </div>
+
+{% endblock %}
