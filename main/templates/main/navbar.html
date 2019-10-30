@@ -8,6 +8,15 @@
     {% if user.is_authenticated %}
     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
         <ul class="navbar-nav ml-auto">
+            <form class="navbar-form" role="search" action="{% url 'search_buisness' %}">
+                <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Buisness" name="buisness">
+                    <div class="input-group-btn">
+                        <button class="btn btn-outline-info" type="submit">Search</button>
+                    </div>
+                </div>
+              
+            </form>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'create_story' %}">
                     <i class="far fa-newspaper"></i> Add story

@@ -170,3 +170,16 @@ def person_info(request):
     }
 
     return render(request,"main/my_profile.html",context)
+
+@login_required
+def search_buisness(request):
+    if 'buisness' in request.GET and request.GET["buisness"]:
+        search_term = request.GET.get("buisness")
+        searched_buisnesses = Neighborhood_buisnesses.buisness_search(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'main/searchbuisness.html',{"message":message,"buisnesses": searched_buisnesses})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'main/searchbuisness.html',{"message":message})

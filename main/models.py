@@ -42,8 +42,8 @@ class Neighborhood_buisnesses(models.Model):
     buisness_number = models.IntegerField(blank=True,null=True)
 
     @classmethod
-    def buisness_search(cls,pk):
-        pass
+    def buisness_search(cls,search_term):
+        return cls.objects.filter(buisness_name__icontains=search_term)
 
     def __str__(self):
         return f'Buisness {self.buisness_name} Owned by {self.user.username}'

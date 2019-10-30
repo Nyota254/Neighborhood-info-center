@@ -6,6 +6,7 @@ from .views import (
     add_neighborhood,
     neighborhood_admin,
     person_info,
+    search_buisness,
 )
 
 urlpatterns = [
@@ -14,5 +15,6 @@ urlpatterns = [
     re_path('^addbuisness/$',add_buisness,name="add_buisness"),
     re_path('^addneighborhood/$',add_neighborhood,name="add_neighborhood"),
     re_path('^neighborhoodadmin/$',neighborhood_admin,name="admin_dashboard"),
-    re_path('^myprofile/$',person_info,name="my_profile")
+    re_path('^myprofile/$',person_info,name="my_profile"),
+    re_path('^searchbuisness/$',search_buisness,name="search_buisness")
 ]
