@@ -41,10 +41,16 @@ body {
     background-attachment: fixed;
 } */
 
+#bg-index {
+    background-color:rgba(0, 0, 0, 0.5); 
+    height: 106vh;
+    background-attachment: fixed;
+}
+
 .index-sideview,.my_profile-sideview {
     height: 200px;
     width: auto;
-    background-color: #eee;
+    background-color:rgba(0, 0, 0, 0.5);
     overflow: auto;
 }
 
